@@ -1,4 +1,4 @@
-package io.github.trgFriendsSongs;
+package com.herokuapp.TRGFriendsSongs;
 
 public class ControllerRuntimeException extends RuntimeException {
     public ControllerRuntimeException() {

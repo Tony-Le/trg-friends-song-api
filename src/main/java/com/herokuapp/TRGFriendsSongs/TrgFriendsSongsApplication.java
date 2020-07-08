@@ -1,4 +1,4 @@
-package io.github.trgFriendsSongs;
+package com.herokuapp.TRGFriendsSongs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

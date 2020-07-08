@@ -1,4 +1,4 @@
-package io.github.trgFriendsSongs;
+package com.herokuapp.TRGFriendsSongs;
 
 import org.junit.jupiter.api.Test;
 

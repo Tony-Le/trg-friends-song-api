@@ -1,4 +1,4 @@
-package io.github.trgFriendsSongs;
+package com.herokuapp.TRGFriendsSongs;
 
 public class SongNotFoundException extends RuntimeException {
     public SongNotFoundException(String id) {

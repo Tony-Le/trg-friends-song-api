@@ -1,4 +1,4 @@
-package io.github.trgFriendsSongs;
+package com.herokuapp.TRGFriendsSongs;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

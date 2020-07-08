@@ -1,4 +1,4 @@
-package io.github.trgFriendsSongs;
+package com.herokuapp.TRGFriendsSongs;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
