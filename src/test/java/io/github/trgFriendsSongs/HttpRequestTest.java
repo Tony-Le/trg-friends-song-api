@@ -1,4 +1,4 @@
-package io.github.trgfriendscovers;
+package io.github.trgFriendsSongs;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class HttpRequestTest {
 
     @Test
     public void searchShouldReturnResult() throws Exception {
-        CollectionModel<?> cm = this.restTemplate.getForObject("http://localhost:" + port + "/covers/api?search=toxic", CollectionModel.class);
+        CollectionModel<?> cm = this.restTemplate.getForObject("http://localhost:" + port + "/songs/api?search=toxic", CollectionModel.class);
         assertThat(cm.getLinks().toString().contains("toxic"));
     }
 }

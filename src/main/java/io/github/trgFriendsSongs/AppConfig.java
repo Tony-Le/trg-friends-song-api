@@ -1,4 +1,4 @@
-package io.github.trgfriendscovers;
+package io.github.trgFriendsSongs;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;

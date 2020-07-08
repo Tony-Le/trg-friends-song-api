@@ -1,4 +1,4 @@
-package io.github.trgfriendscovers;
+package io.github.trgFriendsSongs;
 
 import java.util.Objects;
 
@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 //https://stackoverflow.com/questions/58537519/mongo-date-custom-converter-not-being-called-when-save-method-of-mongo-repositor
 //Saving to repository currently saves class, look to above link to how to change that
-@Document(collection = "trgFriendsCovers") //to know what collection this maps to instead of the default of the class name
-public class Cover {
+@Document(collection = "trgFriendsSongs") //to know what collection this maps to instead of the default of the class name
+public class Song {
     @Id
     public  String id;
     public  String artist;
@@ -19,9 +19,9 @@ public class Cover {
     public  String featuring;
     public  String link;
 
-    public Cover() {}
+    public Song() {}
 
-    public Cover(String artist, String origin, String theme, String featuring, String link) {
+    public Song(String artist, String origin, String theme, String featuring, String link) {
         this.artist = artist;
         this.origin = origin;
         this.theme = theme;
@@ -81,8 +81,8 @@ public class Cover {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cover cover = (Cover) o;
-        return Objects.equals(this.id, cover.id);
+        Song song = (Song) o;
+        return Objects.equals(this.id, song.id);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class Cover {
 
     @Override
     public String toString() {
-        return "Cover{" +
+        return "Song{" +
                 "id=" + id +
                 ", artist='" + artist + '\'' +
                 ", origin='" + origin + '\'' +

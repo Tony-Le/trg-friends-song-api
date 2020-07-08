@@ -8,10 +8,10 @@
 		<version>2.3.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>io.github.trg-friends-covers</groupId>
-	<artifactId>trg-friends-covers</artifactId>
+	<groupId>io.github.trg-friends-songs-api</groupId>
+	<artifactId>trg-friends-songs-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>trg-friends-covers</name>
+	<name>trg-friends-songs-api</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

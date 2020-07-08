@@ -1,4 +1,4 @@
-package io.github.trgfriendscovers;
+package io.github.trgFriendsSongs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,10 +12,10 @@ import java.util.concurrent.Executor;
 @SpringBootApplication
 @EnableCaching
 @EnableAsync
-public class TrgFriendsCoversApplication {
+public class TrgFriendsSongsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TrgFriendsCoversApplication.class, args);
+		SpringApplication.run(TrgFriendsSongsApplication.class, args);
 	}
 
 	@Bean

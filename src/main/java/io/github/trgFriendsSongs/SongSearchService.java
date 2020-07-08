@@ -1,4 +1,4 @@
-package io.github.trgfriendscovers;
+package io.github.trgFriendsSongs;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,30 +12,30 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CoverSearchService {
+public class SongSearchService {
 
     //mongoTemplate initialized from a Sprring annotated Configuration Java class and made available here through the Spring @Bean annotation
     private final MongoTemplate mongoTemplate;
-    private static final Logger logger = LoggerFactory.getLogger(CoverSearchService.class);
+    private static final Logger logger = LoggerFactory.getLogger(SongSearchService.class);
 
-    public CoverSearchService(MongoTemplate mongoTemplate) {
+    public SongSearchService(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 
     @Cacheable("id")
-    public Cover getById(String id) {
-       return mongoTemplate.findById(id, Cover.class);
+    public Song getById(String id) {
+       return mongoTemplate.findById(id, Song.class);
     }
 
     @Cacheable("all")
-    public List<Cover> getAll() {
-        return mongoTemplate.findAll(Cover.class);
+    public List<Song> getAll() {
+        return mongoTemplate.findAll(Song.class);
     }
 
     @Cacheable("search")
-    public List<Cover> findCover(String search) {
-        Query query = TextQuery.query(new TextCriteria().matching(search));
-        List<Cover> results = mongoTemplate.find(query, Cover.class);
-        return results.subList(0,Math.min(results.size(), 20));
+    public List<Song> findSong(String search) {
+        Query query = TextQuery.queryText(new TextCriteria().matchingAny(search.split(" "))).sortByScore().limit(20);
+        List<Song> results = mongoTemplate.find(query, Song.class);
+        return results;
     }
 }
