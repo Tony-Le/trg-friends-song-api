@@ -64,7 +64,8 @@ public class SongController {
 //        return ResponseEntity.noContent().build();
 //    }
 
-    @CrossOrigin(origins = {"http://localhost:4200", "https://tony-le.github.io/"})
+//    @CrossOrigin(origins = {"https://tony-le.github.io/", "https://github.io", "https://github.com/", "http://localhost:4200"}, allowedHeaders =  "*")
+    @CrossOrigin(origins = {"*", "http://localhost:4200"}, allowedHeaders =  "*")
     @GetMapping("/songs/api/search")
     CollectionModel<?> searchSongs(@RequestParam(value="query", required=false) String searchQuery)
     {
