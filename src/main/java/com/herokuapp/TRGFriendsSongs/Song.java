@@ -1,80 +1,61 @@
 package com.herokuapp.TRGFriendsSongs;
 
-import java.util.Objects;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-//database is connected through application.properties
+import java.util.Arrays;
+import java.util.Objects;
 
+//database is connected through application.properties
 //https://stackoverflow.com/questions/58537519/mongo-date-custom-converter-not-being-called-when-save-method-of-mongo-repositor
 //Saving to repository currently saves class, look to above link to how to change that
 @Document(collection = "trgFriendsSongs") //to know what collection this maps to instead of the default of the class name
 public class Song {
     @Id
+    public  String _id;
     public  String id;
-    public  String artist;
-    public  String origin;
-    public  String theme;
-    public  String featuring;
-    public  String link;
+    public  String title;
+    public  String[] tags;
 
     public Song() {}
 
-    public Song(String artist, String origin, String theme, String featuring, String link) {
-        this.artist = artist;
-        this.origin = origin;
-        this.theme = theme;
-        this.featuring = featuring;
-        this.link = link;
+    public Song(String _id, String id, String title, int searchable, String[] tags) {
+        this._id = _id;
+        this.id = id;
+        this.title = title;
+        this.tags = tags;
+    }
+
+    public String get_id() {
+        return _id;
     }
 
     public String getId() {
         return id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
 
-    public String getArtist() {
-        return artist;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
-
-    public String getFeaturing() {
-        return featuring;
-    }
-
-    public void setFeaturing(String featuring) {
-        this.featuring = featuring;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
+    public void setTags(String[] tags) {
+        this.tags = tags;
     }
 
     @Override
@@ -82,23 +63,26 @@ public class Song {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Song song = (Song) o;
-        return Objects.equals(this.id, song.id);
+        return Objects.equals(_id, song._id) &&
+                Objects.equals(id, song.id) &&
+                Objects.equals(title, song.title) &&
+                Arrays.equals(tags, song.tags);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.artist, this.origin, this.theme, this.featuring, this.link);
+        int result = Objects.hash(_id, id, title);
+        result = 31 * result + Arrays.hashCode(tags);
+        return result;
     }
 
     @Override
     public String toString() {
         return "Song{" +
-                "id=" + id +
-                ", artist='" + artist + '\'' +
-                ", origin='" + origin + '\'' +
-                ", theme='" + theme + '\'' +
-                ", featuring='" + featuring + '\'' +
-                ", link='" + link + '\'' +
+                "_id='" + _id + '\'' +
+                ", id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", tags=" + Arrays.toString(tags) +
                 '}';
     }
 }
