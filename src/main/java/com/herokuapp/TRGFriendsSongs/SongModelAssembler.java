@@ -15,5 +15,4 @@ public class SongModelAssembler implements RepresentationModelAssembler<Song, En
                 WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(SongController.class).one(song.getId())).withSelfRel(),
                 WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(SongController.class).all()).withRel("songs"));
     }
-
 }

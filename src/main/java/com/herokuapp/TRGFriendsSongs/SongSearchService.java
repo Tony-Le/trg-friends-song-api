@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.core.query.TextQuery;
@@ -34,7 +35,7 @@ public class SongSearchService {
 
     @Cacheable("search")
     public List<Song> findSong(String search) {
-        Query query = TextQuery.queryText(new TextCriteria().matchingAny(search.split(" "))).sortByScore().limit(20);
+        Query query = TextQuery.queryText(new TextCriteria().matchingAny(search.split(" "))).sortByScore().addCriteria(Criteria.where("searchable").is(1)).limit(20);
         List<Song> results = mongoTemplate.find(query, Song.class);
         return results;
     }
