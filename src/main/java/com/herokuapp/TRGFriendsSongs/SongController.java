@@ -28,43 +28,12 @@ public class SongController {
         return CollectionModel.of(songs, WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(SongController.class).all()).withSelfRel());
     }
 
-//    @PostMapping("/songs")
-//    ResponseEntity<?> songs(@RequestBody Song newsongs) {
-//        EntityModel<Song> entityModel = assembler.toModel(repository.save(newSongs));
-//        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
-//    }
-    // Single item
-
     @GetMapping("/songs/{id}")
     EntityModel<Song> one(@PathVariable String id) {
         Song song = service.getById(id);
         return assembler.toModel(song);
     }
 
-    // Update
-//    @PutMapping("/songs/{id}")
-//    ResponseEntity<?> replaceSong(@RequestBody Song newSong, @PathVariable String id)
-//    {
-//        Song updatedSong = repository.findById(id).get();
-//        updatedSong.setSong(newSong.getSong());
-//        updatedSong.setFeaturing(newSong.getFeaturing());
-//        updatedSong.setTheme(newSong.getTheme());
-//        updatedSong.setOrigin(newSong.getOrigin());
-//        updatedSong.setLink(newSong.getLink());
-//        repository.save(updatedSong);
-//
-//        EntityModel<Song> entityModel = assembler.toModel(updatedSong);
-//        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
-//    }
-//
-//    @DeleteMapping("/songs/{id}")
-//    ResponseEntity<?> deleteSong(@PathVariable String id) {
-//        repository.deleteById(id);
-//
-//        return ResponseEntity.noContent().build();
-//    }
-
-//    @CrossOrigin(origins = {"https://tony-le.github.io/", "https://github.io", "https://github.com/", "http://localhost:4200"}, allowedHeaders =  "*")
     @CrossOrigin(origins = {"*", "http://localhost:4200"}, allowedHeaders =  "*")
     @GetMapping("/songs/api/search")
     CollectionModel<?> searchSongs(@RequestParam(value="query", required=false) String searchQuery)
