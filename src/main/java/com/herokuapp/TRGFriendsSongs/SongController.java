@@ -36,13 +36,13 @@ public class SongController {
 
     @CrossOrigin(origins = {"*", "http://localhost:4200"}, allowedHeaders =  "*")
     @GetMapping("/songs/api/search")
-    CollectionModel<?> searchSongs(@RequestParam(value="query", required=false) String searchQuery)
+    CollectionModel<?> searchSongs(@RequestParam(value="query") String searchQuery, @RequestParam(value="pageNumber", required=false, defaultValue = "0") int pageNumber, @RequestParam(value="pageSize", required=false, defaultValue = "15") int pageSize)
     {
         if (searchQuery == null || searchQuery.isEmpty()) {
             List<EntityModel<Song>> emptySongs = Collections.emptyList();
             return CollectionModel.of(emptySongs, WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(SongController.class).all()).withRel("songs"));
         }
-            List<EntityModel<Song>> songs = service.findSong(searchQuery).stream().map(assembler::toModel).collect(Collectors.toList());
+            List<EntityModel<Song>> songs = service.findSong(searchQuery, pageNumber, pageSize).stream().map(assembler::toModel).collect(Collectors.toList());
             return CollectionModel.of(songs, WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(SongController.class).all()).withSelfRel());
     }
 }
