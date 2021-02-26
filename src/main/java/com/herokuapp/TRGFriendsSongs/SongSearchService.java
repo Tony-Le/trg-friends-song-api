@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -60,6 +61,34 @@ public class SongSearchService {
     @Cacheable("search")
     public List<Song> findSong(String search) {
         Query query = this.searchQuery(search);
+        List<Song> results = mongoTemplate.find(query.with(PageRequest.of(0, DEFAULT_PAGE_SIZE)), Song.class);
+        return results;
+    }
+
+    private static Query recentQuery() {
+        Query query = new Query();
+        return query.with(Sort.by(Sort.Direction.DESC, "publish_date")).addCriteria(Criteria.where("searchable").is(1));
+    }
+
+    @Cacheable("recent")
+    public List<Song> recentSongs(int pageNumber, int pageSize) {
+        Query query = this.recentQuery();
+        pageSize = Math.min(pageSize, MAX_PAGE_SIZE);
+        List<Song> results = mongoTemplate.find(query.with(PageRequest.of(pageNumber, pageSize)), Song.class);
+        return results;
+    }
+
+    @Cacheable("recent")
+    public List<Song> recentSongs(int pageSize) {
+        Query query = this.recentQuery();
+        pageSize = Math.min(pageSize, MAX_PAGE_SIZE);
+        List<Song> results = mongoTemplate.find(query.with(PageRequest.of(0, pageSize)), Song.class);
+        return results;
+    }
+
+    @Cacheable("recent")
+    public List<Song> recentSongs() {
+        Query query = this.recentQuery();
         List<Song> results = mongoTemplate.find(query.with(PageRequest.of(0, DEFAULT_PAGE_SIZE)), Song.class);
         return results;
     }

@@ -3,6 +3,7 @@ package com.herokuapp.TRGFriendsSongs;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -16,46 +17,56 @@ public class Song {
     public  String id;
     public  String title;
     public  String[] tags;
+    public  LocalDateTime publish_date;
 
     public Song() {}
 
-    public Song(String _id, String id, String title, int searchable, String[] tags) {
+    public Song(String _id, String id, String title, String[] tags, LocalDateTime publish_date) {
         this._id = _id;
         this.id = id;
         this.title = title;
         this.tags = tags;
+        this.publish_date = publish_date;
     }
 
     public String get_id() {
         return _id;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String[] getTags() {
-        return tags;
-    }
-
     public void set_id(String _id) {
         this._id = _id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public String[] getTags() {
+        return tags;
+    }
+
     public void setTags(String[] tags) {
         this.tags = tags;
+    }
+
+    public LocalDateTime getPublish_date() {
+        return publish_date;
+    }
+
+    public void setPublish_date(LocalDateTime publish_date) {
+        this.publish_date = publish_date;
     }
 
     @Override
@@ -63,26 +74,11 @@ public class Song {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Song song = (Song) o;
-        return Objects.equals(_id, song._id) &&
-                Objects.equals(id, song.id) &&
-                Objects.equals(title, song.title) &&
-                Arrays.equals(tags, song.tags);
+        return Objects.equals(id, song.id);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(_id, id, title);
-        result = 31 * result + Arrays.hashCode(tags);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Song{" +
-                "_id='" + _id + '\'' +
-                ", id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", tags=" + Arrays.toString(tags) +
-                '}';
+        return Objects.hash(id);
     }
 }
