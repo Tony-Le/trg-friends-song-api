@@ -34,7 +34,7 @@ public class SongController {
         return assembler.toModel(song);
     }
 
-    @CrossOrigin(origins = {"*", "http://localhost:4200"}, allowedHeaders =  "*")
+    @CrossOrigin(origins = {"*"}, allowedHeaders =  "*")
     @GetMapping("/songs/api/search")
     CollectionModel<?> searchSongs(@RequestParam(value="query") String searchQuery, @RequestParam(value="pageNumber", required=false, defaultValue = "0") int pageNumber, @RequestParam(value="pageSize", required=false, defaultValue = "15") int pageSize)
     {
@@ -44,5 +44,13 @@ public class SongController {
         }
             List<EntityModel<Song>> songs = service.findSong(searchQuery, pageNumber, pageSize).stream().map(assembler::toModel).collect(Collectors.toList());
             return CollectionModel.of(songs, WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(SongController.class).all()).withSelfRel());
+    }
+
+    @CrossOrigin(origins = {"*"}, allowedHeaders =  "*")
+    @GetMapping("/songs/api/recent")
+    CollectionModel<?> recentSongs(@RequestParam(value="pageNumber", required=false, defaultValue = "0") int pageNumber, @RequestParam(value="pageSize", required=false, defaultValue = "15") int pageSize)
+    {
+        List<EntityModel<Song>> songs = service.recentSongs(pageNumber, pageSize).stream().map(assembler::toModel).collect(Collectors.toList());
+        return CollectionModel.of(songs, WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(SongController.class).all()).withSelfRel());
     }
 }
